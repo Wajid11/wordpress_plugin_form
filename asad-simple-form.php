@@ -33,9 +33,11 @@ if ( ! defined( 'WPINC' ) ) {
 class AsadSimpleForm{
 
     public function __construct(){
-    add_action('init', array($this, 'create_custom_post_type'));
-    // Add assets (js, css, etc)
-add_action('wp_enqueue_scripts', array($this, 'load_assets'));
+        add_action('init', array($this, 'create_custom_post_type'));
+            // Add assets (js, css, etc)
+        add_action('wp_enqueue_scripts', array($this, 'load_assets'));
+        // Add shortcode
+        add_shortcode('contact-form', array($this, 'load_shortcode'));
     }
 
     public function create_custom_post_type(){
@@ -56,23 +58,60 @@ add_action('wp_enqueue_scripts', array($this, 'load_assets'));
             register_post_type('asad_simple_form', $args);
     }
 
+
     public function load_assets()
     {
     wp_enqueue_style(
     'simple-contact-form',
-    plugin_dir_url( _FILE_ ) . 'css/simple-contact-form.css',
+    plugin_dir_url( __FILE__ ) . 'css/simple-contact-form.css',
     array(),
     1,
     'all'
     );
     wp_enqueue_script(
     'simple-contact-form',
-    plugin_dir_url( __FILE_ ). 'js/simple-contact-form.js',
+    plugin_dir_url( __FILE__ ). 'js/simple-contact-form.js',
     array('jquery'),
     1,
     true
-    )
+    );
+    wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css');
+    wp_enqueue_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js', array('jquery'), '', true);
     }
+
+
+    public function load_shortcode()
+    {?>
+
+
+<div class="simple-contact-form">
+    <div class="container">
+<h1>Send us an email</h1>
+-
+<p>Please fill the below form</p>
+            <form id="simple-contact-form_form">
+                <div class="form-group mb-2">
+                    <input type="text" placeholder="Name" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                    <input type="email" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group mb-2">
+                    <input type="tel" placeholder="Phone" class="form-control">
+                </div>
+                        <div class="form-group mb-2">
+                            <textarea placeholder="Type your message" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+            <button class="btn btn-success btn-block w-100">Send Message</button>
+            </div>
+            </form>
+</div>
+</div>
+   <?php }
+
+
+
 
     }
 

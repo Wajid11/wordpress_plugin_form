@@ -34,6 +34,8 @@ class AsadSimpleForm{
 
     public function __construct(){
     add_action('init', array($this, 'create_custom_post_type'));
+    // Add assets (js, css, etc)
+add_action('wp_enqueue_scripts', array($this, 'load_assets'));
     }
 
     public function create_custom_post_type(){
@@ -52,6 +54,24 @@ class AsadSimpleForm{
             'menu_icon' => 'dashicons-media-text',
             );
             register_post_type('asad_simple_form', $args);
+    }
+
+    public function load_assets()
+    {
+    wp_enqueue_style(
+    'simple-contact-form',
+    plugin_dir_url( _FILE_ ) . 'css/simple-contact-form.css',
+    array(),
+    1,
+    'all'
+    );
+    wp_enqueue_script(
+    'simple-contact-form',
+    plugin_dir_url( __FILE_ ). 'js/simple-contact-form.js',
+    array('jquery'),
+    1,
+    true
+    )
     }
 
     }

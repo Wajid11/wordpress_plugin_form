@@ -38,6 +38,8 @@ class AsadSimpleForm{
         add_action('wp_enqueue_scripts', array($this, 'load_assets'));
         // Add shortcode
         add_shortcode('contact-form', array($this, 'load_shortcode'));
+        // Load javascript
+        add_action('wp_footer', array($this, 'load_scripts'));
     }
 
     public function create_custom_post_type(){
@@ -89,28 +91,44 @@ class AsadSimpleForm{
 <h1>Send us an email</h1>
 -
 <p>Please fill the below form</p>
-            <form id="simple-contact-form_form">
+<!-- method="GET" action="#"/ -->
+            <form id="simple-contact-form__form" >
                 <div class="form-group mb-2">
-                    <input type="text" required placeholder="Name" class="form-control">
+                    <input type="text" name="name" required placeholder="Name" class="form-control">
                 </div>
                 <div class="form-group mb-2">
-                    <input type="email" placeholder="Email" class="form-control">
+                    <input type="email" name="email" placeholder="Email" class="form-control">
                 </div>
                 <div class="form-group mb-2">
-                    <input type="tel" required placeholder="Phone" class="form-control">
+                    <input type="tel" name="tel" required placeholder="Phone" class="form-control">
                 </div>
                         <div class="form-group mb-2">
-                            <textarea required placeholder="Type your message" class="form-control"></textarea>
+                            <textarea name="message" required placeholder="Type your message" class="form-control"></textarea>
             </div>
             <div class="form-group">
-            <button class="btn btn-success btn-block w-100">Send Message</button>
+            <button type="submit" class="btn btn-success btn-block w-100">Send Message</button>
             </div>
             </form>
 </div>
 </div>
    <?php }
 
+public function load_scripts()
+{?>
 
+<script>
+(function($){
+$('#simple-contact-form__form').submit( function(event) {
+    // event.preventDefault();
+    console.log(form);
+// alert("sub");
+
+// alert("submitted")
+});
+})(jQuery)
+</script>
+
+<?php }
 
 
     }

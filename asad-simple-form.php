@@ -91,16 +91,16 @@ class AsadSimpleForm{
 <p>Please fill the below form</p>
             <form id="simple-contact-form_form">
                 <div class="form-group mb-2">
-                    <input type="text" placeholder="Name" class="form-control">
+                    <input type="text" required placeholder="Name" class="form-control">
                 </div>
                 <div class="form-group mb-2">
                     <input type="email" placeholder="Email" class="form-control">
                 </div>
                 <div class="form-group mb-2">
-                    <input type="tel" placeholder="Phone" class="form-control">
+                    <input type="tel" required placeholder="Phone" class="form-control">
                 </div>
                         <div class="form-group mb-2">
-                            <textarea placeholder="Type your message" class="form-control"></textarea>
+                            <textarea required placeholder="Type your message" class="form-control"></textarea>
             </div>
             <div class="form-group">
             <button class="btn btn-success btn-block w-100">Send Message</button>
